@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Contact
+{% endblock title %}
+
+
+{% block body %}
+<div class="container-fluid px=0 ">
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert" >
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+{% endfor %}
+</div>
+{% endif %}
+    <img src="{% static 'img/contactus.jpg' %}" class="d-block w-100 mx-0" alt="Contact Image">
+    <h1 class="text-center">Contact Us</h1>
+
+    <form method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="name">
+        </div>
+        
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" name="phone" class="form-control" id="phone">
+            <div id="phoneHelp" class="form-text">We'll never share your phone number with anyone else.</div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="email">
+        </div>
+        
+        <div class="mb-3">
+            <label for="desc" class="form-label">Tell us why you want to contact us...</label>
+            <textarea class="form-control" name="desc" id="desc" rows="3"></textarea>
+        </div>
+        
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="checked" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}
